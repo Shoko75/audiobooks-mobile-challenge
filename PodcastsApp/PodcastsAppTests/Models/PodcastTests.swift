@@ -14,7 +14,6 @@ final class PodcastTests: XCTestCase {
     private func data(_ json: String) -> Data { json.data(using: .utf8)! }
 
     // MARK: - Happy Path
-    // Valid decoding
     func testPodcast_decodesWithRequiredFields() throws {
         let json = data("""
         {
@@ -42,8 +41,24 @@ final class PodcastTests: XCTestCase {
         XCTAssertEqual(pod?.thumbnail, "https://example.com/thumb.jpg")
     }
 
+    func testBestPodcastsResponse_decodesWithPodcastsArray_hasNextAndCount() {
+        let json = data("""
+        {
+          "has_next": true,
+          "podcasts": [
+            { "id": "1", "title": "A", "publisher": "P" },
+            { "id": "2", "title": "B", "publisher": "Q" }
+          ]
+        }
+        """)
+
+        let res = try? JSONDecoder().decode(BestPodcastsResponse.self, from: json)
+        XCTAssertNotNil(res)
+        XCTAssertEqual(res?.hasNext, true)
+        XCTAssertEqual(res?.podcasts.count, 2)
+    }
+
     // MARK: - Errors
-    // Missing fields (required keys)
     func testPodcast_decodingFails_whenMissingId() {
         let json = data("""
         {
@@ -88,7 +103,6 @@ final class PodcastTests: XCTestCase {
         }
     }
 
-    // Empty or invalid values (business validation)
     func testPodcast_decodingFails_whenIdIsEmpty() {
         let json = data("""
         {
@@ -103,7 +117,6 @@ final class PodcastTests: XCTestCase {
         }
         """)
 
-        // Expect your custom validation to throw (e.g., DecodingError.dataCorrupted)
         XCTAssertThrowsError(try JSONDecoder().decode(BestPodcastsResponse.self, from: json))
     }
 
@@ -124,7 +137,32 @@ final class PodcastTests: XCTestCase {
         XCTAssertThrowsError(try JSONDecoder().decode(BestPodcastsResponse.self, from: json))
     }
 
-    // Unknown fields (should be ignored)
+    func testPodcast_decodingFails_whenIdIsWhitespaceOnly() {
+        let json = data("""
+        {
+          "has_next": true,
+          "podcasts": [
+            { "id": "   \t\n", "title": "Swift Over Coffee", "publisher": "Paul Hudson" }
+          ]
+        }
+        """)
+
+        XCTAssertThrowsError(try JSONDecoder().decode(BestPodcastsResponse.self, from: json))
+    }
+
+    func testPodcast_decodingFails_whenTitleIsWhitespaceOnly() {
+        let json = data("""
+        {
+          "has_next": true,
+          "podcasts": [
+            { "id": "abc123", "title": "   \t\n", "publisher": "Paul Hudson" }
+          ]
+        }
+        """)
+
+        XCTAssertThrowsError(try JSONDecoder().decode(BestPodcastsResponse.self, from: json))
+    }
+
     func testPodcast_decodes_whenUnknownFieldsPresent() throws {
         let json = data("""
         {
@@ -148,7 +186,6 @@ final class PodcastTests: XCTestCase {
         XCTAssertEqual(res?.podcasts.first?.id, "abc123")
     }
 
-    // Type mismatches(id is number)
     func testPodcast_decodingFails_whenIdIsNumberNotString() {
         let json = data("""
         {
@@ -166,7 +203,6 @@ final class PodcastTests: XCTestCase {
         XCTAssertThrowsError(try JSONDecoder().decode(BestPodcastsResponse.self, from: json))
     }
 
-    // Thumbnail URL optionality
     func testPodcast_decodes_whenThumbnailIsMissing() throws {
         let json = data("""
         {
@@ -205,5 +241,26 @@ final class PodcastTests: XCTestCase {
             }
             XCTAssertEqual(key.stringValue, "publisher")
         }
+    }
+
+    func testBestPodcastsResponse_failsOnInvalidTopLevelShape_whenPodcastsIsObject() {
+        let json = data("""
+        {
+          "has_next": true,
+          "podcasts": { "id": "abc123", "title": "T", "publisher": "P" }
+        }
+        """)
+
+        XCTAssertThrowsError(try JSONDecoder().decode(BestPodcastsResponse.self, from: json))
+    }
+
+    func testBestPodcastsResponse_failsOnInvalidTopLevelShape_whenPodcastsMissing() {
+        let json = data("""
+        {
+          "has_next": true
+        }
+        """)
+
+        XCTAssertThrowsError(try JSONDecoder().decode(BestPodcastsResponse.self, from: json))
     }
 }

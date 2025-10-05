@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Podcast: Decodable {
+struct Podcast: Decodable, Equatable {
 	let id: String
 	let title: String
 	let publisher: String
