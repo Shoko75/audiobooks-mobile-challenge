@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct BestPodcastsResponse: Decodable {
+struct BestPodcastsResponse: Decodable, Equatable {
     let hasNext: Bool
     let podcasts: [Podcast]
+
+    private enum CodingKeys: String, CodingKey {
+        case hasNext = "has_next"
+        case podcasts
+    }
 }
