@@ -9,7 +9,6 @@ import XCTest
 @testable import PodcastsApp
 
 final class PodcastTests: XCTestCase {
-
     // MARK: - Helpers
     private func data(_ json: String) -> Data { json.data(using: .utf8)! }
 
@@ -23,7 +22,9 @@ final class PodcastTests: XCTestCase {
               "id": "abc123",
               "title": "Swift Over Coffee",
               "publisher": "Paul Hudson",
-              "thumbnail": "https://example.com/thumb.jpg"
+              "thumbnail": "https://example.com/thumb.jpg",
+              "image": "https://example.com/image.jpg",
+              "description": "A podcast about Swift programming"
             }
           ]
         }
@@ -39,6 +40,8 @@ final class PodcastTests: XCTestCase {
         XCTAssertEqual(pod?.title, "Swift Over Coffee")
         XCTAssertEqual(pod?.publisher, "Paul Hudson")
         XCTAssertEqual(pod?.thumbnail, "https://example.com/thumb.jpg")
+        XCTAssertEqual(pod?.image, "https://example.com/image.jpg")
+        XCTAssertEqual(pod?.description, "A podcast about Swift programming")
     }
 
     func testBestPodcastsResponse_decodesWithPodcastsArray_hasNextAndCount() {
@@ -58,6 +61,81 @@ final class PodcastTests: XCTestCase {
         XCTAssertEqual(res?.podcasts.count, 2)
     }
 
+    // MARK: - Optional Fields
+    func testPodcast_decodes_whenOptionalFieldsMissing() throws {
+        let json = data("""
+        {
+          "has_next": true,
+          "podcasts": [
+            {
+              "id": "abc123",
+              "title": "Swift Over Coffee",
+              "publisher": "Paul Hudson"
+            }
+          ]
+        }
+        """)
+
+        let res = try? JSONDecoder().decode(BestPodcastsResponse.self, from: json)
+        let pod = res?.podcasts.first
+
+        XCTAssertNotNil(pod)
+        XCTAssertNil(pod?.thumbnail)
+        XCTAssertNil(pod?.image)
+        XCTAssertNil(pod?.description)
+    }
+
+    func testPodcast_decodes_whenOnlyThumbnailPresent() throws {
+        let json = data("""
+        {
+          "has_next": true,
+          "podcasts": [
+            {
+              "id": "abc123",
+              "title": "Swift Over Coffee",
+              "publisher": "Paul Hudson",
+              "thumbnail": "https://example.com/thumb.jpg"
+            }
+          ]
+        }
+        """)
+
+        let res = try? JSONDecoder().decode(BestPodcastsResponse.self, from: json)
+        let pod = res?.podcasts.first
+
+        XCTAssertNotNil(pod)
+        XCTAssertEqual(pod?.thumbnail, "https://example.com/thumb.jpg")
+        XCTAssertNil(pod?.image)
+        XCTAssertNil(pod?.description)
+    }
+
+    // MARK: - URL Convenience Properties
+    func testPodcast_thumbnailURL_returnsValidURL() {
+        let podcast = Podcast(
+            id: "test",
+            title: "Test",
+            publisher: "Test",
+            thumbnail: "https://example.com/thumb.jpg",
+            image: nil,
+            description: nil
+        )
+        
+        XCTAssertEqual(podcast.thumbnailURL?.absoluteString, "https://example.com/thumb.jpg")
+    }
+
+    func testPodcast_imageURL_returnsValidURL() {
+        let podcast = Podcast(
+            id: "test",
+            title: "Test",
+            publisher: "Test",
+            thumbnail: nil,
+            image: "https://example.com/image.jpg",
+            description: nil
+        )
+        
+        XCTAssertEqual(podcast.imageURL?.absoluteString, "https://example.com/image.jpg")
+    }
+    
     // MARK: - Errors
     func testPodcast_decodingFails_whenMissingId() {
         let json = data("""
