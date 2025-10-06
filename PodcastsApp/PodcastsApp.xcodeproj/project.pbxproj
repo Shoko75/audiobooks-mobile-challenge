@@ -17,6 +17,9 @@
 		2FE71B432E92EF8E003CAD9E /* PodcastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE71B422E92EF8E003CAD9E /* PodcastTests.swift */; };
 		2FE71B462E92FAFB003CAD9E /* BestPodcastsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE71B452E92FAFB003CAD9E /* BestPodcastsResponse.swift */; };
 		2FE71B4A2E92FB65003CAD9E /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE71B492E92FB65003CAD9E /* Podcast.swift */; };
+		2FE71B4C2E930A45003CAD9E /* PodcastAPIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE71B4B2E930A45003CAD9E /* PodcastAPIClientTests.swift */; };
+		2FE71B4F2E933E1C003CAD9E /* PodcastAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE71B4E2E933E1C003CAD9E /* PodcastAPIClient.swift */; };
+		2FE71B532E934990003CAD9E /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE71B522E934990003CAD9E /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +53,9 @@
 		2FE71B422E92EF8E003CAD9E /* PodcastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastTests.swift; sourceTree = "<group>"; };
 		2FE71B452E92FAFB003CAD9E /* BestPodcastsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestPodcastsResponse.swift; sourceTree = "<group>"; };
 		2FE71B492E92FB65003CAD9E /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
+		2FE71B4B2E930A45003CAD9E /* PodcastAPIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastAPIClientTests.swift; sourceTree = "<group>"; };
+		2FE71B4E2E933E1C003CAD9E /* PodcastAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastAPIClient.swift; sourceTree = "<group>"; };
+		2FE71B522E934990003CAD9E /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +111,7 @@
 				2FE71B1C2E92E989003CAD9E /* Assets.xcassets */,
 				2FE71B1E2E92E989003CAD9E /* Preview Content */,
 				2FE71B472E92FB04003CAD9E /* Shared */,
+				2FE71B502E934957003CAD9E /* Core */,
 			);
 			path = PodcastsApp;
 			sourceTree = "<group>";
@@ -121,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				2FE71B292E92E989003CAD9E /* PodcastsAppTests.swift */,
+				2FE71B4D2E930A55003CAD9E /* Core */,
 				2FE71B442E92EFA0003CAD9E /* Models */,
 			);
 			path = PodcastsAppTests;
@@ -158,6 +166,39 @@
 				2FE71B492E92FB65003CAD9E /* Podcast.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		2FE71B4D2E930A55003CAD9E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				2FE71B542E934C26003CAD9E /* Network */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		2FE71B502E934957003CAD9E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				2FE71B512E934966003CAD9E /* Network */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		2FE71B512E934966003CAD9E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				2FE71B4E2E933E1C003CAD9E /* PodcastAPIClient.swift */,
+				2FE71B522E934990003CAD9E /* NetworkError.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		2FE71B542E934C26003CAD9E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				2FE71B4B2E930A45003CAD9E /* PodcastAPIClientTests.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,8 +331,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FE71B4F2E933E1C003CAD9E /* PodcastAPIClient.swift in Sources */,
 				2FE71B462E92FAFB003CAD9E /* BestPodcastsResponse.swift in Sources */,
 				2FE71B1B2E92E983003CAD9E /* ContentView.swift in Sources */,
+				2FE71B532E934990003CAD9E /* NetworkError.swift in Sources */,
 				2FE71B4A2E92FB65003CAD9E /* Podcast.swift in Sources */,
 				2FE71B192E92E983003CAD9E /* PodcastsAppApp.swift in Sources */,
 			);
@@ -302,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FE71B432E92EF8E003CAD9E /* PodcastTests.swift in Sources */,
+				2FE71B4C2E930A45003CAD9E /* PodcastAPIClientTests.swift in Sources */,
 				2FE71B2A2E92E989003CAD9E /* PodcastsAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
