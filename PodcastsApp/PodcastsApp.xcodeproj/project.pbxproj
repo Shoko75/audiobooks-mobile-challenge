@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2FC1818F2E9461D1003E6B12 /* PodcastsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC1818E2E9461D1003E6B12 /* PodcastsListViewModel.swift */; };
+		2FC181912E9461FD003E6B12 /* PodcastsListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC181902E9461FD003E6B12 /* PodcastsListViewModelTests.swift */; };
 		2FE71B192E92E983003CAD9E /* PodcastsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE71B182E92E983003CAD9E /* PodcastsAppApp.swift */; };
 		2FE71B1B2E92E983003CAD9E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE71B1A2E92E983003CAD9E /* ContentView.swift */; };
 		2FE71B1D2E92E989003CAD9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FE71B1C2E92E989003CAD9E /* Assets.xcassets */; };
@@ -44,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2FC1818E2E9461D1003E6B12 /* PodcastsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsListViewModel.swift; sourceTree = "<group>"; };
+		2FC181902E9461FD003E6B12 /* PodcastsListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsListViewModelTests.swift; sourceTree = "<group>"; };
 		2FE71B152E92E983003CAD9E /* PodcastsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodcastsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FE71B182E92E983003CAD9E /* PodcastsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsAppApp.swift; sourceTree = "<group>"; };
 		2FE71B1A2E92E983003CAD9E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -91,6 +95,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2FC181922E94648B003E6B12 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				2FC181932E946496003E6B12 /* PodcastList */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		2FC181932E946496003E6B12 /* PodcastList */ = {
+			isa = PBXGroup;
+			children = (
+				2FC181942E9464A3003E6B12 /* ViewModels */,
+			);
+			path = PodcastList;
+			sourceTree = "<group>";
+		};
+		2FC181942E9464A3003E6B12 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				2FC1818E2E9461D1003E6B12 /* PodcastsListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		2FC181952E9464B8003E6B12 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				2FC181962E9464C1003E6B12 /* PodcastList */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		2FC181962E9464C1003E6B12 /* PodcastList */ = {
+			isa = PBXGroup;
+			children = (
+				2FC181902E9461FD003E6B12 /* PodcastsListViewModelTests.swift */,
+			);
+			path = PodcastList;
+			sourceTree = "<group>";
+		};
 		2FE71B0C2E92E983003CAD9E = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +164,7 @@
 				2FE71B1E2E92E989003CAD9E /* Preview Content */,
 				2FE71B472E92FB04003CAD9E /* Shared */,
 				2FE71B502E934957003CAD9E /* Core */,
+				2FC181922E94648B003E6B12 /* Features */,
 			);
 			path = PodcastsApp;
 			sourceTree = "<group>";
@@ -138,6 +183,7 @@
 				2FE71B292E92E989003CAD9E /* PodcastsAppTests.swift */,
 				2FE71B4D2E930A55003CAD9E /* Core */,
 				2FE71B442E92EFA0003CAD9E /* Models */,
+				2FC181952E9464B8003E6B12 /* Features */,
 			);
 			path = PodcastsAppTests;
 			sourceTree = "<group>";
@@ -383,6 +429,7 @@
 				2FE71B532E934990003CAD9E /* NetworkError.swift in Sources */,
 				2FE71B4A2E92FB65003CAD9E /* Podcast.swift in Sources */,
 				2FE71B192E92E983003CAD9E /* PodcastsAppApp.swift in Sources */,
+				2FC1818F2E9461D1003E6B12 /* PodcastsListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +439,7 @@
 			files = (
 				2FE71B432E92EF8E003CAD9E /* PodcastTests.swift in Sources */,
 				2FE71B4C2E930A45003CAD9E /* PodcastAPIClientTests.swift in Sources */,
+				2FC181912E9461FD003E6B12 /* PodcastsListViewModelTests.swift in Sources */,
 				2FE71B2A2E92E989003CAD9E /* PodcastsAppTests.swift in Sources */,
 				2FE71B592E943A04003CAD9E /* FavoritesManagerTests.swift in Sources */,
 				2FE71B5F2E944D38003CAD9E /* PodcastsRepositoryTests.swift in Sources */,
