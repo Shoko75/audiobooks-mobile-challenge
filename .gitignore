@@ -1,0 +1,91 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Xcode
+**/xcuserdata/
+**/*.xcuserstate
+**/*.xccheckout
+**/*.moved-aside
+**/*.xcscmblueprint
+**/*.xcuserdatad
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+
+# Derived data and build artifacts
+DerivedData/
+.build/
+Build/
+build/
+*.ipa
+*.dSYM
+*.dSYM.zip
+
+# Swift Package Manager
+.swiftpm/
+Packages/
+Package.resolved
+# If you want Package.resolved tracked for reproducible builds, remove the line above
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output/
+fastlane/README.md
+
+# CocoaPods (not used in this project; keep ignored if added later)
+Pods/
+*.xcworkspace # If using CocoaPods, you may want to track the workspace instead. Default: ignore.
+
+# Carthage (not used, but safe to ignore if ever used)
+Carthage/Build/
+Carthage/Checkouts/
+
+# Accio dependency manager
+Dependencies/
+.accio/
+
+# SwiftLint & Logs
+.swiftlint.yml
+*.log
+
+# Playground
+timeline.xctimeline
+playground.xcworkspace
+
+# Simulator/device data (never commit)
+*.simdevicelog
+*.deviceinfo
+
+# Coverage
+*.profdata
+coverage/
+lcov.info
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
+*.orig
+*.rej
+
+# Asset catalogs generated artifacts
+*.car
+
+# Preview / SwiftUI cache
+*.preview-thumbnails
+*.preview-thumbnails/
