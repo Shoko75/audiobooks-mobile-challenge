@@ -10,7 +10,7 @@ import Foundation
 /// manages favorite state via the repository. No network requests are made
 /// from this view model; it derives all content from the provided `Podcast`.
 @MainActor
-final class PodcastDetailViewModel {
+final class PodcastDetailViewModel: ObservableObject {
     /// Repository dependency used to query and mutate favorite state.
     private let repository: PodcastsRepositoryProtocol
     /// Immutable source podcast used to derive display properties.

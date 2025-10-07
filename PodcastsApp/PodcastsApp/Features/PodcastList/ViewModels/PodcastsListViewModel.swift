@@ -79,6 +79,12 @@ final class PodcastsListViewModel: ObservableObject {
 		repository.isFavorite(id: id)
 	}
 
+	/// Refreshes the view state to reflect any changes in favorites.
+	func refreshFavoriteStates() {
+		// Force UI update by triggering objectWillChange
+		objectWillChange.send()
+	}
+
 	/// Mirrors repository state into published UI properties.
 	private func mirrorRepositoryState() {
 		items = repository.items
