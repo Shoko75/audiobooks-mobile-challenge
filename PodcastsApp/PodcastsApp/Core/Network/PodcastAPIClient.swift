@@ -38,11 +38,9 @@ final class PodcastAPIClient: PodcastAPIClientProtocol {
 	
 	// MARK: - Generic Request Builder
 	private func makeRequest(endpoint: String, queryItems: [URLQueryItem] = []) throws -> URLRequest {
-		guard let url = URL(string: endpoint, relativeTo: baseURL) else {
-			throw NetworkError.badURL
-		}
+		let fullPath = baseURL.appendingPathComponent(endpoint)
 		
-		var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+		var components = URLComponents(url: fullPath, resolvingAgainstBaseURL: false)
 		components?.queryItems = queryItems
 		
 		guard let finalURL = components?.url else {
