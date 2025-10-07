@@ -152,18 +152,19 @@ final class PodcastAPIClientTests: XCTestCase {
     }
 
     // MARK: - URL Building Tests
-    func test_fetchBestPodcasts_buildsCorrectURL() async {
-        URLProtocolStub.requestHandler = { request in
-            let components = URLComponents(url: request.url!, resolvingAgainstBaseURL: false)
-            XCTAssertEqual(components?.path, "best_podcasts")
-            XCTAssertTrue(components?.queryItems?.contains(where: { $0.name == "page" && $0.value == "3" }) == true)
-            
-            let body = Data("{\"has_next\": false, \"podcasts\": []}".utf8)
-            let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
-            return .init(data: body, response: response, error: nil)
-        }
+	func test_fetchBestPodcasts_buildsCorrectURL() async {
+		URLProtocolStub.requestHandler = { request in
+			let components = URLComponents(url: request.url!, resolvingAgainstBaseURL: false)
+			
+			XCTAssertEqual(components?.path, "/api/v2/best_podcasts")
+			XCTAssertTrue(components?.queryItems?.contains(where: { $0.name == "page" && $0.value == "3" }) == true)
+			
+			let body = Data("{\"has_next\": false, \"podcasts\": []}".utf8)
+			let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+			return .init(data: body, response: response, error: nil)
+		}
 
-        let sut = PodcastAPIClient(session: session, baseURL: baseURL)
-        _ = try? await sut.fetchBestPodcasts(page: 3)
-    }
+		let sut = PodcastAPIClient(session: session, baseURL: baseURL)
+		_ = try? await sut.fetchBestPodcasts(page: 3)
+	}
 }
