@@ -1,10 +1,18 @@
+//
+//  PodcastListView.swift
+//  PodcastsApp
+//
+//  Created by Shoko Hashimoto on 2025-10-06.
+//
 import SwiftUI
 
 /// Main list view displaying paginated podcasts with loading states and error handling.
 struct PodcastListView: View {
 	@StateObject private var viewModel: PodcastsListViewModel
+	private let repository: PodcastsRepositoryProtocol
 	
 	init(repository: PodcastsRepositoryProtocol) {
+		self.repository = repository
 		self._viewModel = StateObject(wrappedValue: PodcastsListViewModel(repository: repository))
 	}
 	
@@ -43,7 +51,9 @@ struct PodcastListView: View {
 	private var listView: some View {
 		List {
 			ForEach(Array(viewModel.items.enumerated()), id: \.offset) { _, podcast in
-				PodcastRowView(podcast: podcast, isFavorite: viewModel.isFavorite(id: podcast.id))
+				NavigationLink(destination: PodcastDetailView(viewModel: PodcastDetailViewModel(podcast: podcast, repository: repository))) {
+					PodcastRowView(podcast: podcast, isFavorite: viewModel.isFavorite(id: podcast.id))
+				}
 					.onAppear {
 						Task { await viewModel.loadMoreIfNeeded(currentItem: podcast) }
 					}
@@ -59,6 +69,9 @@ struct PodcastListView: View {
 			}
 		}
 		.listStyle(PlainListStyle())
+		.onAppear {
+			viewModel.refreshFavoriteStates()
+		}
 	}
 	
 	private var loadingView: some View {

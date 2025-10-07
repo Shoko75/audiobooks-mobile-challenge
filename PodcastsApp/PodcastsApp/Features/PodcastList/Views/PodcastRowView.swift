@@ -59,11 +59,6 @@ struct PodcastRowView: View {
 			}
 			
 			Spacer()
-			
-			// Chevron
-			Image(systemName: "chevron.right")
-				.font(.caption)
-				.foregroundColor(.secondary)
 		}
 		.padding(.vertical, 8)
 		.contentShape(Rectangle()) // Makes entire row tappable
