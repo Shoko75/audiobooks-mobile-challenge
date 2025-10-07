@@ -1,3 +1,9 @@
+//
+//  PodcastListView.swift
+//  PodcastsApp
+//
+//  Created by Shoko Hashimoto on 2025-10-06.
+//
 import SwiftUI
 
 /// Main list view displaying paginated podcasts with loading states and error handling.
