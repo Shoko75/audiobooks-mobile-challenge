@@ -48,12 +48,14 @@ final class PodcastsListViewModel: ObservableObject {
 	}
 
 	/// Triggers loading of the next page when the current item is near the end.
-	/// - Parameter currentItem: The row’s podcast being displayed.
-	func loadMoreIfNeeded(currentItem: Podcast) async {
-		guard let idx = items.firstIndex(where: { $0.id == currentItem.id }) else { return }
+	/// Uses index directly to prevent resets with duplicate podcast IDs.
+	/// - Parameters:
+	///   - currentItem: The podcast being displayed.
+	///   - atIndex: The index of the current item in the list.
+	func loadMoreIfNeeded(currentItem: Podcast, atIndex index: Int) async {
 		guard hasMore, !isLoadingMore else { return }
 		let triggerIndex = max(items.count - nearEndThreshold, 0)
-		guard idx >= triggerIndex else { return }
+		guard index >= triggerIndex else { return }
 
 		await repository.loadMore()
 		mirrorRepositoryState()
