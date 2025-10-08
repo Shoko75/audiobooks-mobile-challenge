@@ -91,7 +91,7 @@ The app follows a clean MVVM architecture with a Repository pattern for data man
 
 ## Testing
 ### Test Coverage
-- **Unit Tests**: 95%+ coverage across all layers
+- **Unit Tests**: 90%+ coverage across all layers
 - **UI Tests**: Complete user journey validation
 
 ### Test Structure
