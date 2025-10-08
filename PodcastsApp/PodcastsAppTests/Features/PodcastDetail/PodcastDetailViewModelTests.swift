@@ -100,6 +100,27 @@ final class PodcastDetailViewModelTests: XCTestCase {
 
         XCTAssertEqual(sut.imageURL, podcast.imageURL)
     }
+
+    // MARK: - HTML Stripping Tests
+    @MainActor
+    func test_description_stripsHTMLAndDecodesEntities() async {
+        let repo = MockRepository()
+        let htmlDescription = "<p>This is a <strong>bold</strong> description with &amp; entities &quot;quoted&quot;.</p>"
+        let podcast = makePodcast(description: htmlDescription)
+        let sut = PodcastDetailViewModel(podcast: podcast, repository: repo)
+
+        XCTAssertEqual(sut.descriptionText, "This is a bold description with & entities \"quoted\".")
+    }
+
+    @MainActor
+    func test_description_handlesEmptyHTML() async {
+        let repo = MockRepository()
+        let emptyHTML = "<p></p><br><div>&nbsp;</div>"
+        let podcast = makePodcast(description: emptyHTML)
+        let sut = PodcastDetailViewModel(podcast: podcast, repository: repo)
+
+        XCTAssertEqual(sut.descriptionText, "No description available.")
+    }
 }
 
 
