@@ -50,12 +50,12 @@ struct PodcastListView: View {
 	// MARK: - Subviews
 	private var listView: some View {
 		List {
-			ForEach(Array(viewModel.items.enumerated()), id: \.offset) { _, podcast in
+			ForEach(Array(viewModel.items.enumerated()), id: \.offset) { index, podcast in
 				NavigationLink(destination: PodcastDetailView(viewModel: PodcastDetailViewModel(podcast: podcast, repository: repository))) {
 					PodcastRowView(podcast: podcast, isFavorite: viewModel.isFavorite(id: podcast.id))
 				}
 					.onAppear {
-						Task { await viewModel.loadMoreIfNeeded(currentItem: podcast) }
+						Task { await viewModel.loadMoreIfNeeded(currentItem: podcast, atIndex: index) }
 					}
 			}
 			
